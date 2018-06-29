@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react'; 
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
+import bip39 from 'bip39';
 import { Icon, Row, Col, Input, Button, Layout, Pagination } from 'antd';
 import { connectSubmission, submissionActionCreators } from 'core';
 import { promisify } from '../../utilities';
@@ -12,6 +13,45 @@ const { Content, Header } = Layout;
 class DashboardContainer extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      mnemonic: '',
+      isValid: 'infinite',
+      tokenList: [
+        {name: 'Neo', address: '', privateKey: ''},
+        {name: 'Stellar', address: '', privateKey: ''},
+        {name: 'Btc', address: '', privateKey: ''},
+        {name: 'Eth', address: '', privateKey: ''},
+        {name: 'Ltc', address: '', privateKey: ''},
+      ]
+    }
+  }
+
+  genMenemonic = () => {
+    var mnemonic = bip39.generateMnemonic();
+    this.setState(...this.state, {mnemonic: mnemonic}, () => {
+      if (bip39.validateMnemonic(mnemonic)) {
+        this.setState(...this.state, {isValid: 'valid'});
+      } else {
+        this.setState(...this.state, {isValid: 'invalid'});
+      }
+    });
+  }
+
+  updatedMnemonic = (evt) => {
+    let mnemonic = evt.target.value;
+    this.setState({
+      mnemonic: evt.target.value
+    }, () => {
+      if (mnemonic === '') {
+        this.setState(...this.state, {isValid: 'infinite'});
+      } else {
+        if (bip39.validateMnemonic(mnemonic)) {
+          this.setState(...this.state, {isValid: 'valid'});
+        } else {
+          this.setState(...this.state, {isValid: 'invalid'});
+        }
+      }
+    });
   }
 
   render () {
@@ -34,18 +74,18 @@ class DashboardContainer extends PureComponent {
           <Layout>
             <Content className="main">
               <Row className="mnemonic_title_area">
-                <Col span={14} offset={5} className="mnemonic_title">
+                <Col span={24} className="mnemonic_title">
                   <span>Paste or Generate your mnemonic to derive wallets</span>
                 </Col>
               </Row>
               <Row className="mnemonic_gen_area">
                 <Col span={12} offset={2}>
-                  <div className="mnemonic_words">
-                    <span></span>
+                  <div className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' }>
+                    <Input.TextArea value={this.state.mnemonic} onChange={this.updatedMnemonic} />
                   </div>
                 </Col>
                 <Col span={6} offset={2}>
-                  <Button className="mnemonic_gen_btn">Generate</Button>
+                  <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
                 </Col>
               </Row>
               <Row>
@@ -55,9 +95,17 @@ class DashboardContainer extends PureComponent {
                     <Col span={8}><span>Address</span></Col>
                     <Col span={8}><span>Private Key</span></Col>
                   </Row>
-                  <Row>
-
-                  </Row>
+                  <div className="token_list">
+                    {
+                      this.state.tokenList.map((token, index) => {
+                        return (<Row key={index} className="token_list_header token_list_item">
+                          <Col span={8}><span>{token.name}</span></Col>
+                          <Col span={8}><span>{token.address}</span></Col>
+                          <Col span={8}><span>{token.privateKey}</span></Col>
+                        </Row>)
+                      })
+                    }
+                  </div>
                 </div>
               </Row>
             </Content>
