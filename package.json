@@ -1,5 +1,5 @@
 {
-  "name": "nrl-kyc",
+  "name": "nrl-wallet-utils",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

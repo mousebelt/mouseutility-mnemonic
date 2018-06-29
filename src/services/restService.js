@@ -3,7 +3,7 @@
 import { set, isEmpty} from 'lodash';
 import { apiEndpoint } from './constants';
 
-export async function KycService({ api, third_party, method, params }) {
+export async function RestService({ api, third_party, method, params }) {
   const headers = {};
 
   let path = `${apiEndpoint}${api}`;

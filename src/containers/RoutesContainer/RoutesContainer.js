@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import DashboardContainer from 'containers/DashboardContainer/DashboardContainer';
+import TokenListContainer from 'containers/TokenListContainer/TokenListContainer';
 
 class RoutesContainer extends PureComponent {
 
@@ -14,7 +14,7 @@ class RoutesContainer extends PureComponent {
   render () {
     return (
       <Switch>
-        <Route exact path="/" component={DashboardContainer}/>
+        <Route exact path="/" component={TokenListContainer}/>
         <Redirect to="/404"/>
       </Switch>
     )

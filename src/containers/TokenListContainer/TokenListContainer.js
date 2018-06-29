@@ -10,7 +10,7 @@ import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
 
-class DashboardContainer extends PureComponent {
+class TokenListContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,9 +80,7 @@ class DashboardContainer extends PureComponent {
               </Row>
               <Row className="mnemonic_gen_area">
                 <Col span={12} offset={2}>
-                  <div className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' }>
-                    <Input.TextArea value={this.state.mnemonic} onChange={this.updatedMnemonic} />
-                  </div>
+                  <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
                 </Col>
                 <Col span={6} offset={2}>
                   <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
@@ -132,4 +130,4 @@ const mapDisptachToProps = (dispatch) => {
 
 export default compose(
   connectSubmission(mapStateToProps, mapDisptachToProps),
-)(DashboardContainer);
+)(TokenListContainer);
