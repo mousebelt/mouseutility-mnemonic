@@ -1,1 +1,1 @@
-export { KycService } from './restService';
+export { RestService } from './restService';
