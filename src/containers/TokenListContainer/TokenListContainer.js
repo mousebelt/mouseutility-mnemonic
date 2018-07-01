@@ -6,6 +6,8 @@ import { Icon, Row, Col, Input, Button, Layout, Pagination } from 'antd';
 import { connectSubmission, submissionActionCreators } from 'core';
 import { promisify } from '../../utilities';
 import ListItem from '../../components/ListItem/ListItem';
+import { deriveBitcoin }  from '../../services/derive/bitcoin';
+import { deriveLitecoin }  from '../../services/derive/litecoin';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
@@ -17,11 +19,11 @@ class TokenListContainer extends PureComponent {
       mnemonic: '',
       isValid: 'infinite',
       tokenList: [
-        {name: 'Neo', address: '', privateKey: ''},
-        {name: 'Stellar', address: '', privateKey: ''},
-        {name: 'Btc', address: '', privateKey: ''},
-        {name: 'Eth', address: '', privateKey: ''},
-        {name: 'Ltc', address: '', privateKey: ''},
+        {name: 'Neo', address: '', publicKey: '', privateKey: ''},
+        {name: 'Stellar', address: '',publicKey: '', privateKey: ''},
+        {name: 'Btc', address: '', publicKey: '', privateKey: ''},
+        {name: 'Eth', address: '', publicKey: '', privateKey: ''},
+        {name: 'Ltc', address: '', publicKey: '', privateKey: ''},
       ]
     }
   }
@@ -31,10 +33,23 @@ class TokenListContainer extends PureComponent {
     this.setState(...this.state, {mnemonic: mnemonic}, () => {
       if (bip39.validateMnemonic(mnemonic)) {
         this.setState(...this.state, {isValid: 'valid'});
+        let bitcoinInfo = deriveBitcoin(mnemonic);
+        let litecoinInfo = deriveLitecoin(mnemonic);
+
+        this.generateCoinSeed(2, bitcoinInfo);
+        this.generateCoinSeed(4, litecoinInfo);
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
     });
+  }
+
+  generateCoinSeed(index, data) {
+    let tokenList = this.state.tokenList;
+    tokenList[index].address = data.address;
+    tokenList[index].publicKey = data.xpub;
+    tokenList[index].privateKey = data.xpriv;
+    this.setState({tokenList});
   }
 
   updatedMnemonic = (evt) => {
@@ -47,6 +62,11 @@ class TokenListContainer extends PureComponent {
       } else {
         if (bip39.validateMnemonic(mnemonic)) {
           this.setState(...this.state, {isValid: 'valid'});
+          let bitcoinInfo = deriveBitcoin(mnemonic);
+          let litecoinInfo = deriveLitecoin(mnemonic);
+          
+          this.generateCoinSeed(2, bitcoinInfo);
+          this.generateCoinSeed(4, litecoinInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }
@@ -89,17 +109,19 @@ class TokenListContainer extends PureComponent {
               <Row>
                 <div className="token_list_area">
                   <Row className="token_list_header">
-                    <Col span={8}><span>Token</span></Col>
-                    <Col span={8}><span>Address</span></Col>
-                    <Col span={8}><span>Private Key</span></Col>
+                    <Col span={6}><span>Token</span></Col>
+                    <Col span={6}><span>Address</span></Col>
+                    <Col span={6}><span>Public Key</span></Col>
+                    <Col span={6}><span>Private Key</span></Col>
                   </Row>
                   <div className="token_list">
                     {
                       this.state.tokenList.map((token, index) => {
                         return (<Row key={index} className="token_list_header token_list_item">
-                          <Col span={8}><span>{token.name}</span></Col>
-                          <Col span={8}><span>{token.address}</span></Col>
-                          <Col span={8}><span>{token.privateKey}</span></Col>
+                          <Col span={6}><span>{token.name}</span></Col>
+                          <Col span={6}><Input readOnly="true" value={token.address}/></Col>
+                          <Col span={6}><Input readOnly="true" value={token.publicKey}/></Col>
+                          <Col span={6}><Input readOnly="true" value={token.privateKey}/></Col>
                         </Row>)
                       })
                     }
