@@ -15,5 +15,5 @@ export function deriveBitcoin (mnemonic) {
   let key0FromXpub = account0.neutered().derivePath("0/0").keyPair
   let xpriv = key0.toWIF()
   let addressFromPub = key0FromXpub.getAddress()
-  return {address: addressFromPub, xpub: xpub, xpriv: xpriv};
+  return {address: addressFromPub, publicKey: xpub, privateKey: xpriv};
 }
