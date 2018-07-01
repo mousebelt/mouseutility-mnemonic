@@ -113,8 +113,8 @@ class TokenListContainer extends PureComponent {
                   <Row className="token_list_header">
                     <Col span={6}><span>Token</span></Col>
                     <Col span={6}><span>Address</span></Col>
-                    <Col span={6}><span>Public Key</span></Col>
                     <Col span={6}><span>Private Key</span></Col>
+                    <Col span={6}><span>Extended Public</span></Col>
                   </Row>
                   <div className="token_list">
                     {
@@ -122,8 +122,8 @@ class TokenListContainer extends PureComponent {
                         return (<Row key={index} className="token_list_header token_list_item">
                           <Col span={6}><span>{token.name}</span></Col>
                           <Col span={6}><Input readOnly="true" value={token.address}/></Col>
-                          <Col span={6}><Input readOnly="true" value={token.publicKey}/></Col>
                           <Col span={6}><Input readOnly="true" value={token.privateKey}/></Col>
+                          <Col span={6}><Input readOnly="true" value={token.publicKey}/></Col>
                         </Row>)
                       })
                     }
