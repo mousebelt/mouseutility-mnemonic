@@ -26,5 +26,5 @@ export function deriveLitecoin (mnemonic) {
   };
 
   var addressFromPub = bitcoin.HDNode.fromBase58(xpub, network).derivePath("0/0").getAddress();
-  return {address: addressFromPub, xpub: xpub, xpriv: xpriv};
+  return {address: addressFromPub, publicKey: xpub, privateKey: xpriv};
 }

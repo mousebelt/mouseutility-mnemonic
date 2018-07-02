@@ -8,6 +8,7 @@ import { promisify } from '../../utilities';
 import ListItem from '../../components/ListItem/ListItem';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
 import { deriveLitecoin }  from '../../services/derive/litecoin';
+import { deriveStellar }  from '../../services/derive/stellar';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
@@ -35,7 +36,8 @@ class TokenListContainer extends PureComponent {
         this.setState(...this.state, {isValid: 'valid'});
         let bitcoinInfo = deriveBitcoin(mnemonic);
         let litecoinInfo = deriveLitecoin(mnemonic);
-
+        let stellarInfo = deriveStellar(mnemonic);
+        console.log(stellarInfo);
         this.generateCoinSeed(2, bitcoinInfo);
         this.generateCoinSeed(4, litecoinInfo);
       } else {
@@ -47,8 +49,8 @@ class TokenListContainer extends PureComponent {
   generateCoinSeed(index, data) {
     let tokenList = this.state.tokenList;
     tokenList[index].address = data.address;
-    tokenList[index].publicKey = data.xpub;
-    tokenList[index].privateKey = data.xpriv;
+    tokenList[index].publicKey = data.publicKey;
+    tokenList[index].privateKey = data.privateKey;
     this.setState({tokenList});
   }
 
