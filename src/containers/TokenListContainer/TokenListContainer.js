@@ -37,9 +37,9 @@ class TokenListContainer extends PureComponent {
         let bitcoinInfo = deriveBitcoin(mnemonic);
         let litecoinInfo = deriveLitecoin(mnemonic);
         let stellarInfo = deriveStellar(mnemonic);
-        console.log(stellarInfo);
         this.generateCoinSeed(2, bitcoinInfo);
         this.generateCoinSeed(4, litecoinInfo);
+        this.generateCoinSeed(1, stellarInfo);
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
