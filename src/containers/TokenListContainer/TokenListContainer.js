@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { compose } from 'recompose';
 import bip39 from 'bip39';
 import { Icon, Row, Col, Input, Button, Layout, Pagination } from 'antd';
-import { connectSubmission, submissionActionCreators } from 'core';
-import { promisify } from '../../utilities';
 import ListItem from '../../components/ListItem/ListItem';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
 import { deriveLitecoin }  from '../../services/derive/litecoin';
@@ -66,9 +62,10 @@ class TokenListContainer extends PureComponent {
           this.setState(...this.state, {isValid: 'valid'});
           let bitcoinInfo = deriveBitcoin(mnemonic);
           let litecoinInfo = deriveLitecoin(mnemonic);
-          
+          let stellarInfo = deriveStellar(mnemonic);
           this.generateCoinSeed(2, bitcoinInfo);
           this.generateCoinSeed(4, litecoinInfo);
+          this.generateCoinSeed(1, stellarInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }
@@ -138,20 +135,4 @@ class TokenListContainer extends PureComponent {
   }  
 }
 
-const mapStateToProps = ({submission}) => ({
-  list: submission.list
-});
-
-const mapDisptachToProps = (dispatch) => {
-  const {
-    getSubmissionList
-  } = submissionActionCreators
-
-  return bindActionCreators({
-    getSubmissionList
-  }, dispatch);
-}
-
-export default compose(
-  connectSubmission(mapStateToProps, mapDisptachToProps),
-)(TokenListContainer);
+export default TokenListContainer;

@@ -5,14 +5,10 @@
   "dependencies": {
     "ajv": "^6.5.0",
     "antd": "^3.4.4",
-    "axios": "^0.18.0",
-    "bip32": "^0.1.0",
     "bip39": "^2.5.0",
-    "bitcoin-core": "^2.0.0",
     "bitcoinjs-lib": "^3.3.2",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.10",
-    "query-string": "^6.1.0",
     "react": "^16.3.2",
     "react-app-rewire-less": "^2.1.1",
     "react-bootstrap": "^0.32.1",
@@ -27,6 +23,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
+    "safe-buffer": "^5.1.2",
     "stellar-hd-wallet": "0.0.6"
   },
   "scripts": {
