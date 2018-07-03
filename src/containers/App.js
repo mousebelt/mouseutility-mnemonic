@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RoutesContainer from 'containers/RoutesContainer/RoutesContainer';
-import PageNotFound from 'components/PageNotFound/PageNotFound';
 
 import 'assets/styles/App.less';
 

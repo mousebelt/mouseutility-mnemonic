@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import bip39 from 'bip39';
-import { Icon, Row, Col, Input, Button, Layout, Pagination } from 'antd';
-import ListItem from '../../components/ListItem/ListItem';
+import { Row, Col, Input, Button, Layout } from 'antd';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
 import { deriveLitecoin }  from '../../services/derive/litecoin';
 import { deriveStellar }  from '../../services/derive/stellar';
