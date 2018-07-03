@@ -1,5 +1,3 @@
-/* global describe, it */
-const assert = require('assert')
 const bip39 = require('bip39')
 var bitcoin = require('bitcoinjs-lib')
 
@@ -14,5 +12,5 @@ export function deriveBitcoin (mnemonic) {
   let key0FromXpub = account0.neutered().derivePath("0/0").keyPair
   let xpriv = key0.toWIF()
   let addressFromPub = key0FromXpub.getAddress()
-  return {address: addressFromPub, publicKey: xpub, privateKey: xpriv};
+  return { address: addressFromPub, publicKey: xpub, privateKey: xpriv };
 }

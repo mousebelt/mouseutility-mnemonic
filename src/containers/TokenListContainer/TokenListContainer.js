@@ -5,6 +5,7 @@ import ListItem from '../../components/ListItem/ListItem';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
 import { deriveLitecoin }  from '../../services/derive/litecoin';
 import { deriveStellar }  from '../../services/derive/stellar';
+import { deriveNeocoin }  from '../../services/derive/neocoin';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
@@ -33,9 +34,13 @@ class TokenListContainer extends PureComponent {
         let bitcoinInfo = deriveBitcoin(mnemonic);
         let litecoinInfo = deriveLitecoin(mnemonic);
         let stellarInfo = deriveStellar(mnemonic);
+        let neoInfo = deriveNeocoin(mnemonic);
+
+        this.generateCoinSeed(0, neoInfo);
+        this.generateCoinSeed(1, stellarInfo);
         this.generateCoinSeed(2, bitcoinInfo);
         this.generateCoinSeed(4, litecoinInfo);
-        this.generateCoinSeed(1, stellarInfo);
+        
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
@@ -63,9 +68,12 @@ class TokenListContainer extends PureComponent {
           let bitcoinInfo = deriveBitcoin(mnemonic);
           let litecoinInfo = deriveLitecoin(mnemonic);
           let stellarInfo = deriveStellar(mnemonic);
+          let neoInfo = deriveNeocoin(mnemonic);
+
+          this.generateCoinSeed(0, neoInfo);
+          this.generateCoinSeed(1, stellarInfo);
           this.generateCoinSeed(2, bitcoinInfo);
           this.generateCoinSeed(4, litecoinInfo);
-          this.generateCoinSeed(1, stellarInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }
@@ -79,14 +87,11 @@ class TokenListContainer extends PureComponent {
         <Layout>
           <Header className="header">
             <Row>
-              <Col span={2}>
+              <Col span={5}>
                 <img alt="true" src={logo} className="logo"/>                                                                                                                                     
               </Col>
-              <Col span={17} className="title">
-                <span>Mnemonic Tools</span>
-              </Col>
-              <Col span={5} className="title">
-                <span>No Rest Labs</span>
+              <Col span={4} offset={15} className="title">
+                <span>Mnemonic </span>
               </Col>
             </Row>
           </Header>
