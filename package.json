@@ -5,6 +5,9 @@
   "dependencies": {
     "ajv": "^6.5.0",
     "antd": "^3.4.4",
+    "base-x": "^3.0.2",
+    "bitcoinjs-lib-secp256r1": "https://github.com/coranos/bitcoinjs-lib-secp256r1.git",
+    "neon-js": "git+https://github.com/CityOfZion/neon-js.git#1.1.1",
     "bip39": "^2.5.0",
     "bitcoinjs-lib": "^3.3.2",
     "font-awesome": "^4.7.0",

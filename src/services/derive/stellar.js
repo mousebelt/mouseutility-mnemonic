@@ -6,5 +6,5 @@ export function deriveStellar (mnemonic) {
     const publicKey = wallet.getPublicKey(0)
     const privateKey = wallet.getSecret(0)
     const keyPair = wallet.getKeypair(0)
-    return {address: publicKey, publicKey: '', privateKey: privateKey};
+    return { address: publicKey, publicKey: '', privateKey: privateKey} ;
 }

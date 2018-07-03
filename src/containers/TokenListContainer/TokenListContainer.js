@@ -5,6 +5,7 @@ import ListItem from '../../components/ListItem/ListItem';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
 import { deriveLitecoin }  from '../../services/derive/litecoin';
 import { deriveStellar }  from '../../services/derive/stellar';
+import { deriveNeocoin }  from '../../services/derive/neocoin';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
@@ -33,9 +34,13 @@ class TokenListContainer extends PureComponent {
         let bitcoinInfo = deriveBitcoin(mnemonic);
         let litecoinInfo = deriveLitecoin(mnemonic);
         let stellarInfo = deriveStellar(mnemonic);
+        let neoInfo = deriveNeocoin(mnemonic);
+
+        this.generateCoinSeed(0, neoInfo);
+        this.generateCoinSeed(1, stellarInfo);
         this.generateCoinSeed(2, bitcoinInfo);
         this.generateCoinSeed(4, litecoinInfo);
-        this.generateCoinSeed(1, stellarInfo);
+        
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
@@ -63,9 +68,12 @@ class TokenListContainer extends PureComponent {
           let bitcoinInfo = deriveBitcoin(mnemonic);
           let litecoinInfo = deriveLitecoin(mnemonic);
           let stellarInfo = deriveStellar(mnemonic);
+          let neoInfo = deriveNeocoin(mnemonic);
+
+          this.generateCoinSeed(0, neoInfo);
+          this.generateCoinSeed(1, stellarInfo);
           this.generateCoinSeed(2, bitcoinInfo);
           this.generateCoinSeed(4, litecoinInfo);
-          this.generateCoinSeed(1, stellarInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }

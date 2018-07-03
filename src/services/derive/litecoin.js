@@ -1,5 +1,3 @@
-/* global describe, it */
-const assert = require('assert')
 const bip39 = require('bip39')
 var bitcoin = require('bitcoinjs-lib')
 
@@ -26,5 +24,5 @@ export function deriveLitecoin (mnemonic) {
   };
 
   var addressFromPub = bitcoin.HDNode.fromBase58(xpub, network).derivePath("0/0").getAddress();
-  return {address: addressFromPub, publicKey: xpub, privateKey: xpriv};
+  return { address: addressFromPub, publicKey: xpub, privateKey: xpriv };
 }
