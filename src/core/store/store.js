@@ -13,8 +13,11 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares = [
   thunk,
   sagaMiddleware,
-  process.env.NODE_ENV === 'development' ? createLogger() : null
 ];
+
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(createLogger());
+}
 
 const enhancers = [
   applyMiddleware(...middlewares), // empty for now;
