@@ -3,11 +3,19 @@
  */
 
 const rewireLess = require('react-app-rewire-less');
-
+const path = require('path');
 /* config-overrides.js */
-module.exports = function override(config, env) {
-  config = rewireLess(config, env);
-  // with loaderOptions
-  // config = rewireLess.withLoaderOptions(someLoaderOptions)(config, env);
-  return config;
+module.exports = {
+  webpack: function override(config, env) {
+    config = rewireLess(config, env);
+
+    /**
+     * Remove minify plugin for production build
+     */
+    if (env === 'production') {
+      config.plugins = config.plugins.filter((plugin) => plugin.constructor.name !== 'UglifyJsPlugin');
+    }
+
+    return config;
+  }
 }
