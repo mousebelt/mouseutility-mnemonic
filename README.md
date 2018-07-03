@@ -1,4 +1,4 @@
-#MouseUtils Mnemonic
+# MouseUtility Mnemonic
 
 This is a mnemonic and address generation utility from MouseBelt. You can clone and run it locally with the following commands:
 
