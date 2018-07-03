@@ -87,14 +87,11 @@ class TokenListContainer extends PureComponent {
         <Layout>
           <Header className="header">
             <Row>
-              <Col span={2}>
+              <Col span={5}>
                 <img alt="true" src={logo} className="logo"/>                                                                                                                                     
               </Col>
-              <Col span={17} className="title">
-                <span>Mnemonic Tools</span>
-              </Col>
-              <Col span={5} className="title">
-                <span>No Rest Labs</span>
+              <Col span={4} offset={15} className="title">
+                <span>Mnemonic </span>
               </Col>
             </Row>
           </Header>
