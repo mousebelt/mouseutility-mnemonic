@@ -107,10 +107,13 @@ class TokenListContainer extends PureComponent {
                 </Col>
               </Row>
               <Row className="mnemonic_gen_area">
-                <Col span={12} offset={2}>
+                <Col span={16} offset={4}>
                   <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
                 </Col>
-                <Col span={6} offset={2}>
+                
+              </Row>
+              <Row className="mnemonic_gen_area">
+                <Col span={12} offset={6}>
                   <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
                 </Col>
               </Row>
