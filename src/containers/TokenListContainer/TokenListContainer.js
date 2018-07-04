@@ -42,7 +42,7 @@ class TokenListContainer extends PureComponent {
         this.generateCoinSeed(2, bitcoinInfo);
         this.generateCoinSeed(3, ethInfo);
         this.generateCoinSeed(4, litecoinInfo);
-        
+
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
@@ -90,50 +90,42 @@ class TokenListContainer extends PureComponent {
       <div className="block dashboard">
         <Layout>
           <Header className="header">
-            <Row>
-              <Col span={5}>
-                <img alt="true" src={logo} className="logo"/>                                                                                                                                     
-              </Col>
-              <Col span={4} offset={15} className="title">
-                <span>Mnemonic </span>
-              </Col>
-            </Row>
+            <img alt="true" src={logo} className="logo"/>
+            <span>Mnemonic Tool</span>
           </Header>
           <Layout>
             <Content className="main">
               <Row className="mnemonic_title_area">
                 <Col span={24} className="mnemonic_title">
-                  <span>Paste or Generate your mnemonic to derive wallets</span>
+                  <h3>Paste or Generate your mnemonic to derive wallets</h3>
                 </Col>
               </Row>
               <Row className="mnemonic_gen_area">
-                <Col span={12} offset={2}>
-                  <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
-                </Col>
-                <Col span={6} offset={2}>
-                  <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
-                </Col>
+                <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
+                <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
               </Row>
               <Row>
-                <div className="token_list_area">
-                  <Row className="token_list_header">
-                    <Col span={6}><span>Token</span></Col>
-                    <Col span={6}><span>Address</span></Col>
-                    <Col span={6}><span>Private Key</span></Col>
-                    <Col span={6}><span>Extended Public</span></Col>
-                  </Row>
-                  <div className="token_list">
-                    {
-                      this.state.tokenList.map((token, index) => {
-                        return (<Row key={index} className="token_list_header token_list_item">
-                          <Col span={6}><span>{token.name}</span></Col>
-                          <Col span={6}><Input readOnly="true" value={token.address}/></Col>
-                          <Col span={6}><Input readOnly="true" value={token.privateKey}/></Col>
-                          <Col span={6}><Input readOnly="true" value={token.publicKey}/></Col>
-                        </Row>)
-                      })
-                    }
-                  </div>
+                <div className="table_container">
+                  <table>
+                    <thead>
+                      <td>Token</td>
+                      <td>Address</td>
+                      <td>Private Key</td>
+                      <td>Extended Public</td>
+                    </thead>
+                    <tbody>
+                      {
+                        this.state.tokenList.map((token, index) => {
+                          return (<tr key={index}>
+                            <td>{token.name}</td>
+                            <td><Input readOnly="true" value={token.address}/></td>
+                            <td><Input readOnly="true" value={token.privateKey}/></td>
+                            <td><Input readOnly="true" value={token.publicKey}/></td>
+                          </tr>)
+                        })
+                      }
+                    </tbody>
+                  </table>
                 </div>
               </Row>
             </Content>
@@ -141,7 +133,7 @@ class TokenListContainer extends PureComponent {
         </Layout>
       </div>
     );
-  }  
+  }
 }
 
 export default TokenListContainer;
