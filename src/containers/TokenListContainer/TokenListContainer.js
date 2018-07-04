@@ -108,10 +108,12 @@ class TokenListContainer extends PureComponent {
                 <div className="table_container">
                   <table>
                     <thead>
-                      <td>Token</td>
-                      <td>Address</td>
-                      <td>Private Key</td>
-                      <td>Extended Public</td>
+                      <tr>
+                        <td>Token</td>
+                        <td>Address</td>
+                        <td>Private Key</td>
+                        <td>Extended Public</td>
+                      </tr>
                     </thead>
                     <tbody>
                       {
