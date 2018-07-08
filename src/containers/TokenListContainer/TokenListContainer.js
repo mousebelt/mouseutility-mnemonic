@@ -6,6 +6,7 @@ import { deriveLitecoin }  from '../../services/derive/litecoin';
 import { deriveStellar }  from '../../services/derive/stellar';
 import { deriveNeocoin }  from '../../services/derive/neocoin';
 import { deriveEthereum }  from '../../services/derive/ethcoin';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import logo from 'assets/img/logo.png';
 
 const { Content, Header } = Layout;
@@ -14,6 +15,8 @@ class TokenListContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      hashValue: '',
+      copied: false,
       mnemonic: '',
       isValid: 'infinite',
       tokenList: [
@@ -103,9 +106,13 @@ class TokenListContainer extends PureComponent {
               <Row className="mnemonic_gen_area">
                 <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
                 <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
+                <CopyToClipboard text={this.state.mnemonic} onCopy={() => this.setState({copied: true})}>
+                  <Button className="mnemonic_copy_btn">Copy to clipboard</Button>
+                </CopyToClipboard>
               </Row>
               <Row>
                 <div className="table_container">
+                  <p>You can click on any of the hash values below to copy it to your clipboard.</p>
                   <table>
                     <thead>
                       <tr>
@@ -120,9 +127,9 @@ class TokenListContainer extends PureComponent {
                         this.state.tokenList.map((token, index) => {
                           return (<tr key={index}>
                             <td>{token.name}</td>
-                            <td><Input readOnly="true" value={token.address}/></td>
-                            <td><Input readOnly="true" value={token.privateKey}/></td>
-                            <td><Input readOnly="true" value={token.publicKey}/></td>
+                            <td><Input disabled={true} value={token.address} onClick={({target: {value}}) =>this.setState({mnemonic :value, copied: false})}/></td>
+                            <td><Input disabled={true} value={token.privateKey} onClick={({target: {value}}) => this.setState({mnemonic :value, copied: false})}/></td>
+                            <td><Input disabled={true} value={token.publicKey} onClick={({target: {value}}) => this.setState({mnemonic :value, copied: false})}/></td>
                           </tr>)
                         })
                       }
