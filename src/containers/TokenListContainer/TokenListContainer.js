@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import bip39 from 'bip39';
 import { Row, Col, Input, Button, Layout } from 'antd';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
 import { deriveLitecoin }  from '../../services/derive/litecoin';
 import { deriveStellar }  from '../../services/derive/stellar';
@@ -50,6 +52,28 @@ class TokenListContainer extends PureComponent {
         this.setState(...this.state, {isValid: 'invalid'});
       }
     });
+  }
+
+  submit = () => {
+    if(this.state.mnemonic !== '') {
+      confirmAlert({
+        customUI: ({ onClose }) => {
+          return (
+            <div className='custom-ui'>
+              <h1>Are you sure you want to generate a new mnemonic?</h1>
+              <p>Please make sure you have copied and securely saved the current mnemonic you generated.</p>
+              <button className='cancel-btn' onClick={onClose}>Cancel</button>
+              <button className='confirm-btn' onClick={() => {
+                  this.genMenemonic()
+                  onClose()
+              }}>Confirm</button>
+            </div>
+          )
+        }
+      });
+    } else {
+      this.genMenemonic();
+    }
   }
 
   generateCoinSeed(index, data) {
@@ -105,7 +129,7 @@ class TokenListContainer extends PureComponent {
               </Row>
               <Row className="mnemonic_gen_area">
                 <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
-                <Button className="mnemonic_gen_btn" onClick={this.genMenemonic} >Generate</Button>
+                <Button className="mnemonic_gen_btn" onClick={this.submit} >Generate</Button>
                 <CopyToClipboard text={this.state.mnemonic} onCopy={() => this.setState({copied: true})}>
                   <Button className="mnemonic_copy_btn">Copy to clipboard</Button>
                 </CopyToClipboard>
