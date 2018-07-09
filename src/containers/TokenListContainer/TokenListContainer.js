@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import bip39 from 'bip39';
 import { Row, Col, Input, Button, Layout } from 'antd';
 import { confirmAlert } from 'react-confirm-alert';
@@ -112,6 +113,10 @@ class TokenListContainer extends PureComponent {
     });
   }
 
+  copyHashToClipboard = (hashValue) => {
+    console.log(hashValue)
+  }
+
   render () {
     return (
       <div className="block dashboard">
@@ -133,6 +138,7 @@ class TokenListContainer extends PureComponent {
                 <CopyToClipboard text={this.state.mnemonic} onCopy={() => this.setState({copied: true})}>
                   <Button className="mnemonic_copy_btn">Copy to clipboard</Button>
                 </CopyToClipboard>
+                
               </Row>
               <Row>
                 <div className="table_container">
@@ -150,10 +156,22 @@ class TokenListContainer extends PureComponent {
                       {
                         this.state.tokenList.map((token, index) => {
                           return (<tr key={index}>
-                            <td>{token.name}</td>
-                            <td><Input disabled={true} value={token.address} onClick={({target: {value}}) =>this.setState({mnemonic :value, copied: false})}/></td>
-                            <td><Input disabled={true} value={token.privateKey} onClick={({target: {value}}) => this.setState({mnemonic :value, copied: false})}/></td>
-                            <td><Input disabled={true} value={token.publicKey} onClick={({target: {value}}) => this.setState({mnemonic :value, copied: false})}/></td>
+                            <td><pre>{token.name}</pre></td>
+                            <td>
+                              <CopyToClipboard text={token.address} onCopy={() => this.setState({copied: true})}>
+                                <pre>{token.address}</pre>
+                              </CopyToClipboard>
+                            </td>
+                            <td>
+                              <CopyToClipboard text={token.privateKey} onCopy={() => this.setState({copied: true})}>
+                                <pre>{token.privateKey}</pre>
+                              </CopyToClipboard>
+                            </td>
+                            <td>
+                              <CopyToClipboard text={token.publicKey} onCopy={() => this.setState({copied: true})}>
+                                <pre>{token.publicKey}</pre>
+                              </CopyToClipboard>
+                            </td>
                           </tr>)
                         })
                       }
@@ -168,5 +186,4 @@ class TokenListContainer extends PureComponent {
     );
   }
 }
-
 export default TokenListContainer;

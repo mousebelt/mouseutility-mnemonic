@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react';
+
 // import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RoutesContainer from 'containers/RoutesContainer/RoutesContainer';
@@ -20,5 +22,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
