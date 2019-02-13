@@ -12,13 +12,15 @@
     "eth-hd-wallet": "^0.4.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.10",
+    "merge": ">=1.2.1",
     "neon-js": "git+https://github.com/CityOfZion/neon-js.git#1.1.1",
     "react": "^16.3.2",
     "react-app-rewire-less": "^2.1.1",
     "react-bootstrap": "^0.32.1",
     "react-confirm-alert": "^2.0.5",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.3.2",
+    "react-dev-utils": ">=5.0.2",
+    "react-dom": ">=16.4.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
@@ -29,7 +31,9 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "safe-buffer": "^5.1.2",
-    "stellar-hd-wallet": "0.0.6"
+    "stellar-hd-wallet": "0.0.6",
+    "url-parse": ">=1.4.3",
+    "webpack-dev-server": ">=3.1.11"
   },
   "scripts": {
     "start": "PORT=3003 react-app-rewired start",
