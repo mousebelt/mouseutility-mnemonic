@@ -1,5 +1,5 @@
 // Referenced from : https://ontio.github.io/documentation/ontology_wallet_dev_ts_sdk_en.html#how-to-generate-mnemonic
-import { Crypto, Account, utils } from 'ontology-ts-sdk';
+import { Crypto, Account } from 'ontology-ts-sdk';
 
 export const BIP44_INDEX = 1024;
 
