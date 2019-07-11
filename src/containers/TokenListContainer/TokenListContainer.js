@@ -59,7 +59,7 @@ class TokenListContainer extends PureComponent {
         this.generateCoinSeed(6, ontologyInfo);
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
-      }
+      } 
     });
   }
 
@@ -117,7 +117,7 @@ class TokenListContainer extends PureComponent {
           this.generateCoinSeed(3, ethInfo);
           this.generateCoinSeed(4, litecoinInfo);
           this.generateCoinSeed(5, tronInfo);
-          this.generateCoinSeed(5, ontologyInfo);
+          this.generateCoinSeed(6, ontologyInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }
