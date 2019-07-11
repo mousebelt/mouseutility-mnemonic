@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import bip39 from 'bip39';
-import { utils } from 'ontology-ts-sdk'
 import { Row, Col, Input, Button, Layout } from 'antd';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
