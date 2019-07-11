@@ -9,6 +9,7 @@ import { deriveLitecoin }  from '../../services/derive/litecoin';
 import { deriveStellar }  from '../../services/derive/stellar';
 import { deriveNeocoin }  from '../../services/derive/neocoin';
 import { deriveEthereum }  from '../../services/derive/ethcoin';
+import { deriveTron }  from '../../services/derive/tron';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import logo from 'assets/img/logo.png';
 
@@ -28,6 +29,7 @@ class TokenListContainer extends PureComponent {
         {name: 'Btc', address: '', publicKey: '', privateKey: ''},
         {name: 'Eth', address: '', publicKey: '', privateKey: ''},
         {name: 'Ltc', address: '', publicKey: '', privateKey: ''},
+        {name: 'Tron', address: '', publicKey: '', privateKey: ''},
       ]
     }
   }
@@ -37,18 +39,19 @@ class TokenListContainer extends PureComponent {
     this.setState(...this.state, {mnemonic: mnemonic}, () => {
       if (bip39.validateMnemonic(mnemonic)) {
         this.setState(...this.state, {isValid: 'valid'});
-        let bitcoinInfo = deriveBitcoin(mnemonic);
-        let litecoinInfo = deriveLitecoin(mnemonic);
-        let stellarInfo = deriveStellar(mnemonic);
-        let neoInfo = deriveNeocoin(mnemonic);
-        let ethInfo = deriveEthereum(mnemonic);
+        const bitcoinInfo = deriveBitcoin(mnemonic);
+        const litecoinInfo = deriveLitecoin(mnemonic);
+        const stellarInfo = deriveStellar(mnemonic);
+        const neoInfo = deriveNeocoin(mnemonic);
+        const ethInfo = deriveEthereum(mnemonic);
+        const tronInfo = deriveTron(mnemonic);
 
         this.generateCoinSeed(0, neoInfo);
         this.generateCoinSeed(1, stellarInfo);
         this.generateCoinSeed(2, bitcoinInfo);
         this.generateCoinSeed(3, ethInfo);
         this.generateCoinSeed(4, litecoinInfo);
-
+        this.generateCoinSeed(5, tronInfo);
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
@@ -95,17 +98,19 @@ class TokenListContainer extends PureComponent {
       } else {
         if (bip39.validateMnemonic(mnemonic)) {
           this.setState(...this.state, {isValid: 'valid'});
-          let bitcoinInfo = deriveBitcoin(mnemonic);
-          let litecoinInfo = deriveLitecoin(mnemonic);
-          let stellarInfo = deriveStellar(mnemonic);
-          let neoInfo = deriveNeocoin(mnemonic);
-          let ethInfo = deriveEthereum(mnemonic);
+          const bitcoinInfo = deriveBitcoin(mnemonic);
+          const litecoinInfo = deriveLitecoin(mnemonic);
+          const stellarInfo = deriveStellar(mnemonic);
+          const neoInfo = deriveNeocoin(mnemonic);
+          const ethInfo = deriveEthereum(mnemonic);
+          const tronInfo = deriveTron(mnemonic);
 
           this.generateCoinSeed(0, neoInfo);
           this.generateCoinSeed(1, stellarInfo);
           this.generateCoinSeed(2, bitcoinInfo);
           this.generateCoinSeed(3, ethInfo);
           this.generateCoinSeed(4, litecoinInfo);
+          this.generateCoinSeed(5, tronInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }
