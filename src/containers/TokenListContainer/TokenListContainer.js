@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
 import bip39 from 'bip39';
+import { utils } from 'ontology-ts-sdk'
 import { Row, Col, Input, Button, Layout } from 'antd';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -10,6 +10,7 @@ import { deriveStellar }  from '../../services/derive/stellar';
 import { deriveNeocoin }  from '../../services/derive/neocoin';
 import { deriveEthereum }  from '../../services/derive/ethcoin';
 import { deriveTron }  from '../../services/derive/tron';
+import { deriveOntology }  from '../../services/derive/ontology';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import logo from 'assets/img/logo.png';
 
@@ -30,12 +31,14 @@ class TokenListContainer extends PureComponent {
         {name: 'Eth', address: '', publicKey: '', privateKey: ''},
         {name: 'Ltc', address: '', publicKey: '', privateKey: ''},
         {name: 'Tron', address: '', publicKey: '', privateKey: ''},
+        {name: 'Ontology', address: '', publicKey: '', privateKey: ''},
       ]
     }
   }
 
   genMenemonic = () => {
-    var mnemonic = bip39.generateMnemonic();
+    const mnemonic = bip39.generateMnemonic();
+
     this.setState(...this.state, {mnemonic: mnemonic}, () => {
       if (bip39.validateMnemonic(mnemonic)) {
         this.setState(...this.state, {isValid: 'valid'});
@@ -45,6 +48,7 @@ class TokenListContainer extends PureComponent {
         const neoInfo = deriveNeocoin(mnemonic);
         const ethInfo = deriveEthereum(mnemonic);
         const tronInfo = deriveTron(mnemonic);
+        const ontologyInfo = deriveOntology(mnemonic);
 
         this.generateCoinSeed(0, neoInfo);
         this.generateCoinSeed(1, stellarInfo);
@@ -52,6 +56,7 @@ class TokenListContainer extends PureComponent {
         this.generateCoinSeed(3, ethInfo);
         this.generateCoinSeed(4, litecoinInfo);
         this.generateCoinSeed(5, tronInfo);
+        this.generateCoinSeed(6, ontologyInfo);
       } else {
         this.setState(...this.state, {isValid: 'invalid'});
       }
@@ -104,6 +109,7 @@ class TokenListContainer extends PureComponent {
           const neoInfo = deriveNeocoin(mnemonic);
           const ethInfo = deriveEthereum(mnemonic);
           const tronInfo = deriveTron(mnemonic);
+          const ontologyInfo = deriveOntology(mnemonic);
 
           this.generateCoinSeed(0, neoInfo);
           this.generateCoinSeed(1, stellarInfo);
@@ -111,6 +117,7 @@ class TokenListContainer extends PureComponent {
           this.generateCoinSeed(3, ethInfo);
           this.generateCoinSeed(4, litecoinInfo);
           this.generateCoinSeed(5, tronInfo);
+          this.generateCoinSeed(5, ontologyInfo);
         } else {
           this.setState(...this.state, {isValid: 'invalid'});
         }
