@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import bip39 from 'bip39';
 import { utils } from 'ontology-ts-sdk'; // Because of sdk bug, this shouldn't be removed;
-import { Row, Col, Input, Button, Layout } from 'antd';
+import { Row, Col, Input, Button, Layout, message } from 'antd';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deriveBitcoin }  from '../../services/derive/bitcoin';
@@ -125,8 +125,8 @@ class TokenListContainer extends PureComponent {
     });
   }
 
-  copyHashToClipboard = (hashValue) => {
-    console.log(hashValue)
+  onCopy = (msg) => {
+    message.info(msg);
   }
 
   render () {
@@ -147,7 +147,7 @@ class TokenListContainer extends PureComponent {
               <Row className="mnemonic_gen_area">
                 <Input.TextArea className={this.state.isValid === 'valid' ? 'mnemonic_words valid' : this.state.isValid === 'invalid' ? 'mnemonic_words invalid' : 'mnemonic_words' } value={this.state.mnemonic} onChange={this.updatedMnemonic} />
                 <Button className="mnemonic_gen_btn" onClick={this.submit} >Generate</Button>
-                <CopyToClipboard text={this.state.mnemonic} onCopy={() => this.setState({copied: true})}>
+                <CopyToClipboard text={this.state.mnemonic} onCopy={() => this.onCopy('Mnemonic has been copied to clipboard')}>
                   <Button className="mnemonic_copy_btn">Copy to clipboard</Button>
                 </CopyToClipboard>
                 
@@ -170,17 +170,17 @@ class TokenListContainer extends PureComponent {
                           return (<tr key={index}>
                             <td><pre>{token.name}</pre></td>
                             <td>
-                              <CopyToClipboard text={token.address} onCopy={() => this.setState({copied: true})}>
+                              <CopyToClipboard text={token.address} onCopy={() => this.onCopy(`${token.name} address has been copied to clipboard`)}>
                                 <pre>{token.address}</pre>
                               </CopyToClipboard>
                             </td>
                             <td>
-                              <CopyToClipboard text={token.privateKey} onCopy={() => this.setState({copied: true})}>
+                              <CopyToClipboard text={token.privateKey} onCopy={() => this.onCopy(`${token.name} privateKey has been copied to clipboard`)}>
                                 <pre>{token.privateKey}</pre>
                               </CopyToClipboard>
                             </td>
                             <td>
-                              <CopyToClipboard text={token.publicKey} onCopy={() => this.setState({copied: true})}>
+                              <CopyToClipboard text={token.publicKey} onCopy={() => this.onCopy(`${token.name} publicKey has been copied to clipboard`)}>
                                 <pre>{token.publicKey}</pre>
                               </CopyToClipboard>
                             </td>
