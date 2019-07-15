@@ -14,7 +14,7 @@ export function deriveOntology(mnemonic) {
   const account = Account.create(privateKey, '');
 
   return {
-    address: account.address.value,
+    address: account.address.toBase58(),
     publicKey: account.publicKey,
     privateKey: privateKey.key
   };
