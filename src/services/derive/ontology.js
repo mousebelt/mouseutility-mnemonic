@@ -7,15 +7,12 @@ export function deriveOntology(mnemonic) {
   // const derivePath = `m/44'/${BIP44_INDEX}'/${index}'/0/0`
   // Use default path "m/44'/1024'/0'/0/0"
   const privateKey = Crypto.PrivateKey.generateFromMnemonic(mnemonic);
-
-  // `password` is an empty string for simplicity.
-  // Please refer the following link to see all params
-  // https://apidoc.ont.io/tssdk/classes/_account_.account.html#create
-  const account = Account.create(privateKey, '');
+  const publicKey = privateKey.getPublicKey();
+  const address = Crypto.Address.fromPubKey(publicKey);
 
   return {
-    address: account.address.toBase58(),
-    publicKey: account.publicKey,
+    address: address.toBase58(),
+    publicKey: publicKey.key,
     privateKey: privateKey.key
   };
 }
