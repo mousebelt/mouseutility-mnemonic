@@ -48,7 +48,7 @@
   "devDependencies": {
     "react-app-rewired": "^1.5.2"
   }
-  "dependencies":  {
+  "dependencies":{
   "handlebars": ">4.0.14"
 }
 }
