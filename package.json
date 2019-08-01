@@ -5,6 +5,7 @@
   "dependencies": {
     "ajv": "^6.5.0",
     "handlebars": "^4.0.14",
+    "lodash": "^4.17.11",
     "antd": "^3.4.4",
     "base-x": "^3.0.2",
     "bip32": "^2.0.3",
@@ -13,7 +14,6 @@
     "bitcoinjs-lib-secp256r1": "https://github.com/coranos/bitcoinjs-lib-secp256r1.git",
     "eth-hd-wallet": "^0.4.0",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.11",
     "merge": ">=1.2.1",
     "neon-js": "git+https://github.com/CityOfZion/neon-js.git#1.1.1",
     "ontology-ts-sdk": "^1.0.18",
