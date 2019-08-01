@@ -13,7 +13,7 @@
     "bitcoinjs-lib-secp256r1": "https://github.com/coranos/bitcoinjs-lib-secp256r1.git",
     "eth-hd-wallet": "^0.4.0",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "merge": ">=1.2.1",
     "neon-js": "git+https://github.com/CityOfZion/neon-js.git#1.1.1",
     "ontology-ts-sdk": "^1.0.18",
