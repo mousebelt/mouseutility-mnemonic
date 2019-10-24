@@ -33,7 +33,7 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "safe-buffer": "^5.2.0",
-    "stellar-hd-wallet": "0.0.6",
+    "stellar-hd-wallet": "0.0.10",
     "tron-http-tools": "https://github.com/TronWatch/tron-http-tools",
     "tronweb": "^2.6.4",
     "url-parse": ">=1.4.3",
